@@ -1,7 +1,7 @@
 const {VoiceConnection, StreamDispatcher } = require('discord.js');
 const { Command, CommandoMessage } = require('discord.js-commando');
 
-const ytdl = require('ytdl-core-discord');
+const ytdl = require('ytdl-core');
 
 
 

@@ -1,7 +1,10 @@
 const {VoiceConnection, StreamDispatcher } = require('discord.js');
 const { Command, CommandoMessage } = require('discord.js-commando');
 
-const ytdl = require('ytdl-core-discord');
+const key = process.env.apiToken;
+
+const ytdl = require('ytdl-core');
+const ytsr = require('youtube-search');
 
 
 
@@ -32,17 +35,21 @@ module.exports = class PlayCommand extends Command{
     async run(message , { query }){
             const server = message.client.server;
         await message.member.voice.channel.join().then((connection) => {
-                if(server.currentVideo.url != ""){
-                    server.queue.push({
-                        title: "" , url: query
-                    });
-                    return message.say("Ajouter à la file d'attente");
-                }
 
-                server.currentVideo = {
-                    title: "" , url: query
-                };
-                this.runVideo(message, connection, query);
+                ytsr(query , {key: key, maxResults:1 , type:'video'}).then((results) =>{
+                    if(results.results[0]){
+                        const fondVideo = {
+                            url: results.results[0].link , title: results.results[0].title
+                        };  
+
+                          
+                        server.currentVideo = fondVideo;
+                    this.runVideo(message, connection);
+                    }
+                    
+                })
+                
+               
             });
     }
 
@@ -54,22 +61,19 @@ module.exports = class PlayCommand extends Command{
      */
     async runVideo(message, connection , videoUrl){
             const server = message.client.server;
-            const dispatcher = connection.play(await ytdl(videoUrl , { filter : 'audioonly' }), {type: 'opus'})
+            const dispatcher = connection.play(await ytdl(server.currentVideo.url , { filter : 'audioonly' }))
 
 
-            server.queue.shift();
+          
             server.dispatcher = dispatcher;
-            server.connection = connection;
+           
             
             dispatcher.on('finish' , ()=> {
-                if(server.queue[0]){
-                    server.currentVideo = server.queue[0];
-                    return this.runVideo(message, connection, server.currentVideo.url);
-                }
+               
                 
             });
           
 
-            return message.say("En train de jouer :notes: ");
+            return message.say("En train de jouer :notes: " + "'" +server.currentVideo.title +"'");
     }
 }
