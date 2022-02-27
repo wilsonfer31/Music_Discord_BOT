@@ -27,7 +27,7 @@ module.exports = class JoinCommand extends Command{
 
           return message.say("`" + "Relation Vehicule-Couleur \n" + "One-To-one : un Vehicule ne peut avoir qu'une seule Couleur et une Couleur ne peut appartenir qu'un Vehicule \n" 
           + "Many-to-one exemple : Un Vehicule ne peut avoir qu'une seule Couleur mais cette coleur peut avoir plusieurs Vehicule \n" + "one-to-many : Un Vehicule peut avoir plusieurs Couleurs et une Couleur ne peut appartenir qu'un Vehicule \n"+
-          "many-to-many : Un Vehicule peut avoir plusieurs couleurs et les Couleur peuvent avoir plusieurs Vehicules /n"
+          "many-to-many : Un Vehicule peut avoir plusieurs couleurs et les Couleur peuvent avoir plusieurs Vehicules \n"
           +"`");
     }
 }
