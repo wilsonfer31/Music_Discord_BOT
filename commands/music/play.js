@@ -33,7 +33,12 @@ module.exports = class PlayCommand extends Command{
      * @param {String} query 
      */
     async run(message , { query }){
-            const server = message.client.server;
+        const server = message.client.server;
+           if(!message.member.voice.channel){
+                return message.say('Tu dois être dans un salon vocal pour pouvoir utiliser cette commande.');
+            }
+        
+            
         await message.member.voice.channel.join().then((connection) => {
 
                 ytsr(query , {key: key, maxResults:1 , type:'video'}).then((results) =>{
@@ -65,9 +70,7 @@ module.exports = class PlayCommand extends Command{
 
 
           
-            if(!message.member.voice.channel){
-                return message.say('Tu dois être dans un salon vocal pour pouvoir utiliser cette commande.');
-            }
+         
             
             server.dispatcher = dispatcher;
            
