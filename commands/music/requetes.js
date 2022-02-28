@@ -26,7 +26,7 @@ module.exports = class JoinCommand extends Command{
        
 
           return message.say("`" + "GET : récup d'une ressource \n" +
-          "  POST : ajout ou modif d'une ressource \n" +
+          "POST : ajout ou modif d'une ressource \n" +
           "PUT : écrase une ressource existante \n" +
           "PATCH : modification partielle d'une ressource\n" +
           "DELETE : suppression d'une ressource" +"`");
