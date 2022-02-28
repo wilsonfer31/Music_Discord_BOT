@@ -19,7 +19,10 @@
     .registerDefaultTypes()
     .registerDefaultGroups()
     .registerDefaultCommands()
-    .registerGroup('music' , 'Music')
+        .registerGroups([
+		['music', 'Music'],
+		['cour', 'Cour'],
+	])
     .registerCommandsIn(path.join(__dirname, 'commands'));
 
 
