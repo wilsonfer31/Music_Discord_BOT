@@ -9,7 +9,7 @@ module.exports = class JoinCommand extends Command{
     constructor(client){
         super(client, {
             name: 'application-properties',
-            group: 'music',
+            group: 'cour',
             memberName: 'application-properties',
             description: 'Donne Exemple de properties',
            
