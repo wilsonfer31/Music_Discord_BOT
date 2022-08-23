@@ -1,1 +1,1 @@
-Petit bot discord de musique!
+Basic Music Discord Bot
